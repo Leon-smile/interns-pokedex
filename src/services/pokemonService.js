@@ -25,7 +25,7 @@ const formatStatName = (name) => {
     speed: 'Speed'
   };
   return statNames[name] || formatName(name);
-};/**
+}; /**
  * Transform raw Pokemon data into display-ready format
  */
 const formatPokemonData = (pokemon, species = null) => {
@@ -154,14 +154,16 @@ export const searchPokemon = async (query) => {
 export const getPokemonTypes = async () => {
   const types = await pokemonRepository.getPokemonTypes();
 
-  return types
-    // Remove special types
-    .filter((t) => t.name !== 'unknown' && t.name !== 'shadow')
-    // Format for display
-    .map((t) => ({
-      name: t.name,
-      displayName: formatName(t.name)
-    }));
+  return (
+    types
+      // Remove special types
+      .filter((t) => t.name !== 'unknown' && t.name !== 'shadow')
+      // Format for display
+      .map((t) => ({
+        name: t.name,
+        displayName: formatName(t.name)
+      }))
+  );
 };
 
 export const getPokemonByType = async (
